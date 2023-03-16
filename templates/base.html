@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css'%}">
+    <title>Thought Experiment</title>
+</head>
+<body class ="base_body">
+    <div class="top_nav">
+        <ul class ="nav_links">
+            <li><a href="/home">Home</a></li>
+            <li><a href="/about">About Me</a></li>
+            <li><a href="/theories">Ethical Theories</a></li>
+            <li class = "dropdown">
+                <a href="javascript:void(0)" class="dropbutton">Experiments</a>
+                <div class="dropdown-content">
+                    <a>Prisoner's Dilemma</a>
+                    <a>Trolley Car</a>
+                    <a>Mill's Happiness Calculator</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="content">
+        {% block content %}
+
+        {% endblock %}
+    </div>
+</body>
+</html>
