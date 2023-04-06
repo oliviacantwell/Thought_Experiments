@@ -10,3 +10,6 @@ def about(request):
 
 def theories(request):
     return render(request,'theories.html')
+
+def prisoner(request):
+    return render(request,'prisoner.html')

@@ -2,41 +2,219 @@
 
 {% block content %}
 
-<p>loading</p>
-<div class ='quiz-containter' id="quiz"> 
-    <div class="quiz-header">
-        <h2 id="question">Question Text</h2>
-        <ul>
-            <li>
-                <input type="radio" name="answer" id="a" class="answer">
-                <label for="a" id="a_text">Answer</label>
-            </li>
+<div class="trolly-body">
+    <div class ="quiz-container" id="quiz"> 
+        <div class="quiz-header">
+            <h3 class="question" id="question">Question Text</h3>
+            <ul class="question-ul">
+                <li>
+                    <input type="radio" name="answer" id="a" class="answer">
+                    <label for="a" id="a_text">Answer</label>
+                </li>
+    
+                <li>   
+                    <input type="radio" name="answer" id="b" class="answer">
+                    <label for="b" id="b_text">Answer</label>
+                </li> 
+    
+                <li>   
+                    <input type="radio" name="answer" id="c" class="answer">
+                    <label for="c" id="c_text">Answer</label>
+                </li> 
+    
+                <li>   
+                    <input type="radio" name="answer" id="d" class="answer">
+                    <label for="d" id="d_text">Answer</label>
+                </li> 
+    
+                <li>   
+                    <input type="radio" name="answer" id="e" class="answer">
+                    <label for="e" id="e_text">Answer</label>
+                </li> 
 
-            <li>   
-                <input type="radio" name="answer" id="b" class="answer">
-                <label for="b" id="b_text">Answer</label>
-            </li> 
-
-            <li>   
-                <input type="radio" name="answer" id="c" class="answer">
-                <label for="c" id="c_text">Answer</label>
-            </li> 
-
-            <li>   
-                <input type="radio" name="answer" id="d" class="answer">
-                <label for="d" id="d_text">Answer</label>
-            </li> 
-
-            <li>   
-                <input type="radio" name="answer" id="d" class="answer">
-                <label for="d" id="d_text">Answer</label>
-            </li> 
-        </ul>
-
+                <li>   
+                    <input type="radio" name="answer" id="f" class="answer">
+                    <label for="f" id="f_text">Answer</label>
+                </li> 
+            </ul>
+    
+        </div>
+      <button class="trolly-submit" id ='trolly-submit'>Submit</button>
     </div>
 </div>
-<button id="trolly-submit">Submit</button>
 <script>
+    const quizData = [
+        {
+            question: "Imagine that you are in a train yard. There is a set of tracks and a lever in front of you. The tracks fork in a Y shape. On the left are five workers and on the right is one worker. You look behind you and see a trolly car thundering uncontrolably down the tracks. You see that unless you pull the switch lever in front of you, it will go down the left track and kill the five workers. But if you pull the lever, it'll switch the track and kill the one person instead. Do you pull the lever to switch the track?",
+            a: "Yes, it is better to kill one than to kill five",
+            b: "Yes, it would be my responsability to save the five",
+            c: "No, if I pull the lever that it means I will be held responsible for the one death.",
+            d: "No, because it is wrong to kill even one person, despite the consequences. If I don't pull the lever, then I wouldn't be actually killing the five.",
+            e: "Yes, because I want to be someone that saves people.",
+            f: "Yes, I would have a social obligation to save as many people as possible",
+            one: "u",
+            two: "k",
+            three: "e",
+            four: "k",
+            five: "v",
+            six: "u",
 
+        },
+
+        {
+            question: "Now imagine that there is now no switch in the tracks. The trolly car will kill the five people. But this time you look next to you and see that there is a fat man beside you. You know that if you push the fat man in front of the trolly car it will kill him, but it will save the five workers. Do you push the fat man?",
+            a: "Yes, it would still be better to kill one person than two",
+            b: "No, because it would make me a killer to push him with my bare hands",
+            c: "No, because I would probably go to jail or get in trouble for killing the fat man, whereas I would not get in trouble for not pushing him",
+            d: "No, because I should not use a person as a tool or object, even if it is to help other people.",
+            e: "Yes, because my intent is still to save the five people",
+            f: "Yes, because a fat man would not have as much to contribute to society than five healthy people",
+            one: "u",
+            two: "v",
+            three: "e",
+            four: "k",
+            five: "v",
+            six: "u",
+        },
+
+        {
+            question: "Let's modify the scenario...instead of pushing the fat man, you see that he is standing on a trap door. If you press a red button in front of you, it will release the trap door and the man will fall onto the tracks and stop the trolly car. Would you push the button?",
+            a: "Yes, because it still doesn't matter how he dies as long as it saves the five",
+            b: "Yes, because pushing a button makes me feel less guilty than pushing him with my bare hands",
+            c: "Yes, because I would see myself as less of a killer than pushing him with my bare hands",
+            d: "No, because no matter how he is killed, I am still using him as an object",
+            e: "No, because I would still be killing someone, which is always wrong",
+            f: "No, because killing someone, even if it was so save other people, would negatively impact my character. Even if it wasn't my bare hands, I would still be a killer",
+            one: "u",
+            two: "e",
+            three: "v",
+            four: "k",
+            five: "k",
+            six: "v",
+        },
+
+        {
+            question: "Let's switch things up. Reimagine the original scenario: there is a Y shaped track and the trolly is headed to kill five people, or a lever could be switch to kill one. This time the one person is a doctor who will go on to cure cancer and save millions. Would you still switch the track to kill the one?",
+            a: "Yes, because people have intrinsic value so one person cannot be valued over another person",
+            b: "Yes, because five people is still more than one",
+            c: "Yes, because I don't know for sure that the doctor will cure cancer",
+            d: "No, because the doctor will save the lives of more than five when he cures cancer",
+            e: "No, because people would get mad at me if I killed the scientist",
+            f: "No, because I think it would make me a better person if I saved the scientist that would save others",        
+            one: "k",
+            two: "u",
+            three: "k",
+            four: "u",
+            five: "e",
+            six: "v",
+        },
+
+        {
+            question: "Last scenario...The five are regular people, but the one person is your loving mother. Would you switch the track to kill your mother and save the five citizens?",
+            a: "Yes, because five people is more than one",
+            b: "Yes, because I would be selfish to save my mother over five other people",
+            c: "Yes, because other people would call me selfish for putting my mother above five other people",
+            d: "No, because I have a duty to save my mother",
+            e: "No, because that would make me a bad child, and I am grateful for what my mom has done for me in the past",
+            f: "No, because I would feel too guilty to kill my own mother",
+            one: "u",
+            two: "v",
+            three: "e",
+            four: "k",
+            five: "v",
+            six: "e",
+        },
+    ];
+
+const quiz = document.getElementById('quiz')
+const answerEls = document.querySelectorAll('.answer')
+const questionEl = document.getElementById('question')
+const a_text = document.getElementById('a_text')
+const b_text = document.getElementById('b_text')
+const c_text = document.getElementById('c_text')
+const d_text = document.getElementById('d_text')
+const e_text = document.getElementById('e_text')
+const f_text = document.getElementById('f_text')
+const submitBtn = document.getElementById('trolly-submit')
+
+let currentQuiz = 0
+
+let utilScore = 0
+let kantScore = 0
+let virtueScore = 0
+let egoScore = 0
+
+loadQuiz()
+
+function loadQuiz() {
+    deselectAnswers()
+
+    const currentQuizData = quizData[currentQuiz]
+    questionEl.innerText = currentQuizData.question
+    a_text.innerText = currentQuizData.a
+    b_text.innerText = currentQuizData.b
+    c_text.innerText = currentQuizData.c
+    d_text.innerText = currentQuizData.d
+    e_text.innerText = currentQuizData.e
+    f_text.innerText = currentQuizData.f
+}
+
+function deselectAnswers() {
+    answerEls.forEach(answerEl => answerEl.checked = false)
+}
+
+function getSelected() {
+    let answer
+    answerEls.forEach(answerEl => {
+        if (answerEl.checked) {
+            answer = answerEl.id
+        }
+    })
+    return answer
+}
+
+let winner
+
+function decideWinner() {
+    switch(utilScore, kantScore, virtueScore, egoScore){
+        case utilScore == Math.max(utilScore,kantScore,virtueScore,egoScore):
+            winner = "Utilitarianism";
+            break;
+
+        case kantScore == Math.max(utilScore,kantScore,virtueScore,egoScore):
+            winner = "Kantianism";
+            break;
+        
+        case virtueScore == Math.max(utilScore,kantScore,virtueScore,egoScore): 
+            winner = "Virtue Ethics";
+            break;
+
+        case egoScore == Math.max(utilScore,kantScore,virtueScore,egoScore): 
+            winner = "Egoism";
+            break;
+    }
+    return winner 
+}
+
+submitBtn.addEventListener('click', () => {
+    const answer = getSelected()
+    if (answer) {
+        if (answer === quizData[currentQuiz].one) {
+            score++
+        } 
+
+        currentQuiz++
+
+        if(currentQuiz < quizData.length) {
+            loadQuiz()
+        } else {
+
+            quiz.innerHTML = `
+           <h2>You scored highest in ${winner}</h2>
+           <button onclick="location.reload()">Reload</button>
+           `
+        }
+    }
+})
 </script>
 {% endblock %}

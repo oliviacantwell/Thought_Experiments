@@ -1,0 +1,284 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="trolly-body">
+    <div class ="quiz-container" id="quiz"> 
+      <div id="prisoner-inst">
+        <div id="prisoner-inst-top">
+          <h2 id="prisoner-title">Prisoner's Dilemma</h2>
+          {% load static %}
+          <a href="/home" id = "prisoner-exit"><img  src="{% static 'exit.png'%}"></a>
+        </div>
+        <p id="prisoner-text">The object of the game is to get the most points possible in 10 rounds. You will be given a choice to steal or split the 100 points. If both parties choose split, you both are awarded 50 points. If one person chooses steal and the other split, the stealer gets the full 100. If both parties choose steal, then no one gets any points. Choose wisely...</p>
+        {% load static %}
+        <img id="chart-pic" src="{% static 'golden-balls-pic.png' %}"> 
+        <button id="prisoner-start" onclick="startPrison()">Start</button>
+      </div>
+      <div id="prisoner-top" style="display:none">
+        <p id="round">
+        1/10
+      </p>
+      <ul id="prisoner-score">
+        <li id="yScore">You: 0 </li>
+        <li id ="oScore">Them: 0 </li>
+      </ul>
+      {% load static %}
+      <a href="/home" id = "prisoner-exit"><img  src="{% static 'exit.png'%}"></a>
+      </div>
+        <div id="user-choice" style="display:none">
+            <div class="quiz-header">
+            <!-- <p class="question" id="question" id="choice-text">Do you want to...</p> -->
+            <p id="choice-text">Do you want to...</p>
+          <div class="choice-grid">
+            <button class="prisoner-submit" id="split-choice" onclick="opponentSubmit()">Split</button>
+          <p id="choice-or">
+            or
+          </p>
+            <button class="prisoner-submit" id="steal-choice" onclick="opponentSubmit()">Steal</button>
+          </div>
+          </div>
+      </div>
+          <div id="opponent-screen" style="display:none">
+            <!-- <div class="prisoner-header"> -->
+              <p style="margin:25px">
+              Your opponent chose...
+              </p>
+            <h3 id="opponent-choice">
+            
+            </h3>
+            <p class="prisoner-result">
+              
+            </p>
+            <!-- </div> -->
+            <button class="prisoner-next" onclick="prisonerSubmit()">
+              Next
+            </button>
+            
+          </div>
+          <div id="result-screen" style="display:none">
+            <div id="result-top">
+              <h3 id="final-title">Final Results</h3>
+              {% load static %}
+              <a href="/home" id = "prisoner-exit"><img  src="{% static 'exit.png'%}"></a>
+            </div>
+            <div id="result-box">
+              <h4 id="yResultFinal"></h4>
+              <h4 id="oResultFinal"></h4>
+            </div>
+            
+            <h2 id="result"></h2>
+
+          </div>
+      
+    </div>
+</div>
+  </div>
+  <script>
+    var x = document.getElementById('user-choice');
+    var y = document.getElementById('opponent-screen');
+   
+  function startPrison() {
+    document.getElementById('prisoner-inst').style.display = 'none';
+    x.style.display = 'block';
+    document.getElementById('prisoner-top').style.display ='grid';
+  }
+
+  function prisonerSubmit() {
+       
+  y.style.display = 'none';
+  if (x.style.display === 'none') {
+    x.style.display = 'block';
+  } else {
+    x.style.display = 'none';
+  }
+    }
+    
+    function opponentSubmit() {
+    
+    x.style.display = 'none';
+      if (y.style.display === 'none') {
+    y.style.display = 'block';
+  } else {
+    y.style.display = 'none';
+  }
+    }
+    
+  function endResult() {
+    x.style.display = 'none';
+    y.style.display = 'none';
+    document.getElementById('result-screen').style.display = 'block';
+    document.getElementById('prisoner-top').style.display = 'none';
+    document.getElementById('yResultFinal').innerHTML = "You: "+ yScoreNum;
+    document.getElementById('oResultFinal').innerHTML = "Them: "+ oScoreNum;
+
+    if (yScoreNum > oScoreNum){
+      document.getElementById('result').innerHTML = "You Won!";
+    }
+    else if (yScoreNum < oScoreNum){
+      document.getElementById('result').innerHTML = "You Lost...";
+    }
+    else {
+      document.getElementById('result').innerHTML = "You Tied"
+    }
+
+  }  
+    
+//     function makeEaseOut(timing) {
+//       return function(timeFraction) {
+//         return 1 - timing(1 - timeFraction);
+//       }
+//     }
+
+//     function bounce(timeFraction) {
+//       for (let a = 0, b = 1; 1; a += b, b /= 2) {
+//         if (timeFraction >= (7 - 4 * a) / 11) {
+//           return -Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2)
+//         }
+//       }
+//     }
+
+//     function quad(timeFraction) {
+//       return Math.pow(timeFraction, 2);
+//     }
+    
+//     var submit = document.getElementsByClassName('prisoner-submit')
+//     var page = document.getElementsByClassName('prisoner-header');
+//     var result = document.getElementsByClassName('opponent-choice')
+    
+//     if (y.style.display === 'block') {
+
+//       let height = page.clientHeight - result.clientHeight;
+//       let width = 100;
+
+//       animate({
+//         duration: 2000,
+//         timing: makeEaseOut(bounce),
+//         draw: function(progress) {
+//           result.style.top = height * progress + 'px'
+//         }
+//       });
+
+//       animate({
+//         duration: 2000,
+//         timing: makeEaseOut(quad),
+//         draw: function(progress) {
+//           result.style.left = width * progress + "px"
+//         }
+//       });
+//     }
+
+function opponentChoice(){
+
+  var floatRandom = Math.random()
+
+  var difference = 11 - 10
+
+  // random between 0 and the difference
+  var random = Math.round(difference * floatRandom)
+
+  var choice = random + 10
+
+    if (choice == 11){
+      text = "Steal!"
+    }
+        
+    else if (choice == 10) {
+      text = "Split!"
+    }
+        
+    else
+      text = choice.toString()
+    return text
+}
+
+var buttons = document.getElementsByClassName("prisoner-submit");
+var steal = document.getElementById("steal-choice");
+var split = document.getElementById("split-choice");
+var round = 1;
+
+var yScoreNum = 0;
+var oScoreNum = 0;
+
+//var playerChoice = 0
+
+steal.addEventListener('click', function() {playerChoice = 1})
+split.addEventListener('click', function(){playerChoice = 2})
+//steal.addEventListener('click', function() {playerChoice = 1})
+//split.addEventListener('click', function(){playerChoice = 2})
+//addEventListener('click',  run);
+var run = function() {
+  textl = opponentChoice()
+        function drawText(word) {
+          
+          word = word || textl;
+          var wordArray = word.split('');
+          var innerTextElement = document.getElementById('opponent-choice');
+          innerTextElement.innerHTML = '';
+          innerTextElement.classList.remove('done-animating');
+          wordArray.forEach(function (letter, index) {
+            var span = document.createElement('span');
+            span.textContent = letter;
+            span.className = 'letter animate';
+            span.style['animation-delay'] = (300 * index) + 'ms';
+            innerTextElement.appendChild(span);
+
+            if (index === wordArray.length - 1) {
+              span.addEventListener('animationend', function () {
+                innerTextElement.classList.add('done-animating');
+              });
+            }
+          });
+        }
+
+        drawText();
+        
+    function keepScore(){
+              switch (true) {
+                case textl == "Split!" && playerChoice == 1:
+                  console.log("split and steal");
+                  yScoreNum += 100;
+                  break;
+                case textl == "Split!" && playerChoice == 2:
+                  console.log("split and split");
+                  yScoreNum += 50;
+                  oScoreNum += 50;
+                  break;
+                case textl == "Steal!" && playerChoice == 1:
+                  console.log("steal and steal");
+                  break;
+                case textl == "Steal!" && playerChoice == 2: 
+                  console.log("steal and split");
+                  oScoreNum += 100;
+                  break;
+                //default:
+                //  console.log("I think I broken something")
+              }
+              document.getElementById('yScore').innerHTML = "You: " +yScoreNum;
+              document.getElementById('oScore').innerHTML = "Them: " +oScoreNum;
+              round++
+              if (round > 10){
+                endResult();
+              }
+              else {
+                document.getElementById('round').innerHTML = round+"/10"
+              }
+              
+            }
+        keepScore();
+        }
+        
+        
+      
+  for (var i = 0; i < buttons.length; i++){
+  buttons[i].addEventListener('click', run);
+}  
+
+
+
+
+
+
+  </script>
+
+
+{% endblock %}

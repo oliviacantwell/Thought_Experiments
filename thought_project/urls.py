@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    # path('',include('prisoner.urls')),
+    path('',include('prisoner.urls')),
     # path('',include('mills_calc.urls')),
     path('',include('thought_app.urls')),
     path('',include('trolly.urls')),
