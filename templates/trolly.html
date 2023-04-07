@@ -4,8 +4,15 @@
 
 <div class="trolly-body">
     <div class ="quiz-container" id="quiz"> 
-        <div class="quiz-header">
-            <h3 class="question" id="question">Question Text</h3>
+        <!-- <div class="quiz-header"> -->
+            <div id="trolly-inst">
+                <h2 id="trolly-title">The Trolly Car</h2>
+                <p id="trolly-inst-text">You will be given a scenario and several options as to what you would do in the scenario 
+                    and why. Based on your answers, the quiz will show you which ethical theory your beleifs and actions align with.</p>
+                <button id="trolly-start" onclick="trollyStart()">Start</button>
+            </div>
+            <div id="trolly-play" style="display:none"> 
+            <h3 class="question" id="question" id="trolly-question">Question Text</h3>
             <ul class="question-ul">
                 <li>
                     <input type="radio" name="answer" id="a" class="answer">
@@ -38,9 +45,10 @@
                 </li> 
             </ul>
     
-        </div>
+        <!-- </div> -->
       <button class="trolly-submit" id ='trolly-submit'>Submit</button>
     </div>
+</div>
 </div>
 <script>
     const quizData = [
@@ -52,13 +60,14 @@
             d: "No, because it is wrong to kill even one person, despite the consequences. If I don't pull the lever, then I wouldn't be actually killing the five.",
             e: "Yes, because I want to be someone that saves people.",
             f: "Yes, I would have a social obligation to save as many people as possible",
-            one: "u",
-            two: "k",
-            three: "e",
-            four: "k",
-            five: "v",
-            six: "u",
-
+            u1: "a",
+            u2: "f",
+            k1: "b",
+            k2: "d",
+            v1: "e",
+            v2: "none",
+            e1: "c",
+            e2: "none",
         },
 
         {
@@ -69,12 +78,14 @@
             d: "No, because I should not use a person as a tool or object, even if it is to help other people.",
             e: "Yes, because my intent is still to save the five people",
             f: "Yes, because a fat man would not have as much to contribute to society than five healthy people",
-            one: "u",
-            two: "v",
-            three: "e",
-            four: "k",
-            five: "v",
-            six: "u",
+            u1: "a",
+            u2: "f",
+            k1: "d",
+            k2: "none",
+            v1: "b",
+            v2: "e",
+            e1: "c",
+            e2: "none",
         },
 
         {
@@ -85,12 +96,14 @@
             d: "No, because no matter how he is killed, I am still using him as an object",
             e: "No, because I would still be killing someone, which is always wrong",
             f: "No, because killing someone, even if it was so save other people, would negatively impact my character. Even if it wasn't my bare hands, I would still be a killer",
-            one: "u",
-            two: "e",
-            three: "v",
-            four: "k",
-            five: "k",
-            six: "v",
+            u1: "a",
+            u2: "none",
+            k1: "d",
+            k2: "e",
+            v1: "c",
+            v2: "f",
+            e1:"b",
+            e2: "none",
         },
 
         {
@@ -101,12 +114,14 @@
             d: "No, because the doctor will save the lives of more than five when he cures cancer",
             e: "No, because people would get mad at me if I killed the scientist",
             f: "No, because I think it would make me a better person if I saved the scientist that would save others",        
-            one: "k",
-            two: "u",
-            three: "k",
-            four: "u",
-            five: "e",
-            six: "v",
+            u1: "b",
+            u2: "d",
+            k1: "a",
+            k2: "c",
+            v1: "f",
+            v2: "none",
+            e1:"e",
+            e2: "none",
         },
 
         {
@@ -117,12 +132,15 @@
             d: "No, because I have a duty to save my mother",
             e: "No, because that would make me a bad child, and I am grateful for what my mom has done for me in the past",
             f: "No, because I would feel too guilty to kill my own mother",
-            one: "u",
-            two: "v",
-            three: "e",
-            four: "k",
-            five: "v",
-            six: "e",
+            u1: "a",
+            u2: "none",
+            k1: "d",
+            k2: "none",
+            v1: "b",
+            v2: "e",
+            e1:"c",
+            e2: "f",
+
         },
     ];
 
@@ -143,6 +161,12 @@ let utilScore = 0
 let kantScore = 0
 let virtueScore = 0
 let egoScore = 0
+
+function trollyStart(){
+    document.getElementById("trolly-inst").style.display = "none";
+    document.getElementById("trolly-play").style.display = "block";
+   // document.getElementById("trolly-submit").style.display = "block";
+}
 
 loadQuiz()
 
@@ -173,25 +197,105 @@ function getSelected() {
     return answer
 }
 
-let winner
+
+
+function tied() {
+    
+    var uk = utilScore+kantScore
+    var uv = utilScore+virtueScore
+    var ue = utilScore+egoScore
+
+    var kv = kantScore+virtueScore
+    var ke = kantScore+ egoScore
+
+    var ve = virtueScore+egoScore
+    var tie
+    
+//    switch(uk,uv,ue,kv,ke,ve){
+ //       case uk == Math.max(uk,uv,ue,kv,ke,ve):
+   //         var tie = "Utilitarianism and Kantianism";
+     //       break;
+       // case uv == Math.max(uk,uv,ue,kv,ke,ve):
+         //   var tie = "Utilitarianism and Virtue Ethics";
+           // break;
+  //      case ue == Math.max(uk,uv,ue,kv,ke,ve):
+    //        var tie = "Utilitarianism and Egoism";
+      //      break;
+        //case kv == Math.max(uk,uv,ue,kv,ke,ve):
+          //  var tie = "Kantianism and Virther Ethics";
+            //break;
+ //       case ke == Math.max(uk,uv,ue,kv,ke,ve):
+   //         var tie = "Kantianism and Egoism";
+     //       break;
+       // case ve == Math.max(uk,uv,ue,kv,ke,ve):
+         //   var tie = "Virtue Ethics and Egoism";
+           // break;
+      //  default:
+      //      var tie = Math.max(uk,uv,ue,kv,ke,ve);
+      //  };
+      if (uk == Math.max(uk,uv,ue,kv,ke,ve)){
+        tie = "Utilitarianism and Kantianism";
+      }
+      else if (uv == Math.max(uk,uv,ue,kv,ke,ve)){
+        tie = "Utilitarianism and Virtue Ethics";
+      }
+      else if (ue == Math.max(uk,uv,ue,kv,ke,ve)){
+        tie = "Utilitarianism and Egoism";
+      }
+      else if (kv == Math.max(uk,uv,ue,kv,ke,ve)){
+        tie = "Kantianism and Virtue Ethics";
+      }
+      else if (ke == Math.max(uk,uv,ue,kv,ke,ve)){
+        tie = "Kantianism and Egoism";
+      }
+      else {
+        tie = "Virtue Ethics and Egoism";
+      }
+
+    return tie;
+}
 
 function decideWinner() {
-    switch(utilScore, kantScore, virtueScore, egoScore){
-        case utilScore == Math.max(utilScore,kantScore,virtueScore,egoScore):
-            winner = "Utilitarianism";
-            break;
+    var winner
+//    switch(utilScore, kantScore, virtueScore, egoScore){
+//        case utilScore == Math.max(utilScore,kantScore,virtueScore,egoScore):
+  //          winner = "Utilitarianism";
+    //        break;
+//
+  //      case kantScore == Math.max(utilScore,kantScore,virtueScore,egoScore):
+    //        winner = "Kantianism";
+      //      break;
+        //
+    //    case virtueScore == Math.max(utilScore,kantScore,virtueScore,egoScore): 
+      //      winner = "Virtue Ethics";
+        //    break;
+//
+  //      case egoScore == Math.max(utilScore,kantScore,virtueScore,egoScore): 
+    //        winner = "Egoism";
+      //      break;
+      //  default:
+        //    winner = tied();
+          //  break;
 
-        case kantScore == Math.max(utilScore,kantScore,virtueScore,egoScore):
-            winner = "Kantianism";
-            break;
-        
-        case virtueScore == Math.max(utilScore,kantScore,virtueScore,egoScore): 
-            winner = "Virtue Ethics";
-            break;
+ //   };
+    if (utilScore==kantScore||utilScore==virtueScore||utilScore==egoScore||kantScore==virtueScore||kantScore==egoScore||virtueScore==egoScore){
+        winner = tied();
+    }
 
-        case egoScore == Math.max(utilScore,kantScore,virtueScore,egoScore): 
-            winner = "Egoism";
-            break;
+    else if (utilScore == Math.max(utilScore,kantScore,virtueScore,egoScore)){
+        winner = "Utilitarianism";
+    }
+    else if (kantScore == Math.max(utilScore,kantScore,virtueScore,egoScore)){
+        winner = "Kantianism";
+    }
+    else if (virtueScore == Math.max(utilScore,kantScore,virtueScore,egoScore)){
+        winner = "Virtue Ethics";
+    }
+    else if (egoScore == Math.max(utilScore,kantScore,virtueScore,egoScore)){
+        winner = "Egoism";
+    }
+    else {
+        winner = tied()
     }
     return winner 
 }
@@ -199,19 +303,52 @@ function decideWinner() {
 submitBtn.addEventListener('click', () => {
     const answer = getSelected()
     if (answer) {
-        if (answer === quizData[currentQuiz].one) {
-            score++
+        if (answer === quizData[currentQuiz].u1) {
+            utilScore++
+            console.log("util"+utilScore);
         } 
+        if (answer === quizData[currentQuiz].u2){
+            utilScore++
+            console.log("util"+utilScore);
+        }
+        if (answer === quizData[currentQuiz].k1){
+            kantScore++
+            console.log("kant"+kantScore);
+        }
+        if (answer === quizData[currentQuiz].k2){
+            kantScore++
+            console.log("kant"+kantScore);
+        }
+        if (answer === quizData[currentQuiz].v1){
+            virtueScore++
+            console.log("virtue"+virtueScore);
+        }
+        if (answer === quizData[currentQuiz].v2){
+            virtueScore++
+            console.log("virtue"+virtueScore);
+        }
+        if (answer === quizData[currentQuiz].e1){
+            egoScore++
+            console.log("ego"+egoScore);
+        }
+        if (answer === quizData[currentQuiz].e2){
+            egoScore++
+            console.log("ego"+egoScore);
+        }
+
 
         currentQuiz++
 
         if(currentQuiz < quizData.length) {
             loadQuiz()
         } else {
+            var highest = decideWinner()
 
             quiz.innerHTML = `
-           <h2>You scored highest in ${winner}</h2>
-           <button onclick="location.reload()">Reload</button>
+            {% load static %}
+            <a href="/home" id = "prisoner-exit" style="float:right;"><img  src="{% static 'exit.png'%}"></a>
+           <h2 style="padding:30px; text-align:center">You scored highest in ${highest}</h2>
+           <p style="padding:10px; text-align:center">You can read more about it <a href="/theories">here</a></p>
            `
         }
     }

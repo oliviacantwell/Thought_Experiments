@@ -12,7 +12,16 @@
         <p id="prisoner-text">The object of the game is to get the most points possible in 10 rounds. You will be given a choice to steal or split the 100 points. If both parties choose split, you both are awarded 50 points. If one person chooses steal and the other split, the stealer gets the full 100. If both parties choose steal, then no one gets any points. Choose wisely...</p>
         {% load static %}
         <img id="chart-pic" src="{% static 'golden-balls-pic.png' %}"> 
+        <p style="padding:10px;">Click <a style="color:blue" onclick="multi()">here</a> to play multiplayer</p>
         <button id="prisoner-start" onclick="startPrison()">Start</button>
+      </div>
+      <div id="multi" style="display:none">
+        <h3 id="multi-title">Multiplayer</h3>
+        <p id="mutli-text">Either give your friend the code below or type their code into the box</p>
+        <h2 id="code"></h2>
+        <input type="text" id="input">
+        <input type="submit" value="Join" id="join">
+        <button id="multi-start">Start</button>
       </div>
       <div id="prisoner-top" style="display:none">
         <p id="round">
@@ -67,6 +76,7 @@
             </div>
             
             <h2 id="result"></h2>
+            <p style="padding:15px;">To learn more about what ethical theory could cause both people to win, see "Social contract theory" in the <a href="/theories">theories page</a></p>
 
           </div>
       
@@ -77,6 +87,12 @@
     var x = document.getElementById('user-choice');
     var y = document.getElementById('opponent-screen');
    
+  function multi() {
+    randomCode = Math.random().toString(36).substr(8,8);
+    document.getElementById("multi").style.display = "block";
+    document.getElementById("code").innerText = randomCode;
+    document.getElementById("prisoner-inst").style.display ="none";
+  }
   function startPrison() {
     document.getElementById('prisoner-inst').style.display = 'none';
     x.style.display = 'block';
